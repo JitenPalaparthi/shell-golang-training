@@ -43,8 +43,8 @@ func main() {
 		n2       = 123123
 		n3       = float32(12.23)
 		n4       = 82323.23
-		n5       = 0b11001100110011
-		n6       = 0xaabbccddeeff
+		n5       = 0b11001100110011 // int in the form of binary
+		n6       = 0xaabbccddeeff   // int in the form of hex
 		n7       = uint64(123434343)
 		any2     = any("1231231")
 		any3     = any(true)
