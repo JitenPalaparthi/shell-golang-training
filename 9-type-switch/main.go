@@ -93,8 +93,8 @@ func main() {
 	sum1 := AddG2(10.123, 20.123)
 	fmt.Println("Sum:", sum1)
 
-	sum2 := AddG2(true, false)
-	fmt.Println("Sum:", sum1)
+	// sum2 := AddG2(true, false)
+	// fmt.Println("Sum:", sum1)
 
 }
 

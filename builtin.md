@@ -1,6 +1,6 @@
 # keywords
 
-- const, func, import, package,var (5/25)
+- break,case,continue,const,default,else,fallthrough,for,func,goto,if,import, package,return,switch,var (16/25)
 
 - There are 25 keywords in go
 
