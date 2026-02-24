@@ -77,7 +77,6 @@ func main() {
 	case num%8 == 0:
 		println(num, "is divisible by 8")
 	}
-
 }
 
 func GetChar() byte {
