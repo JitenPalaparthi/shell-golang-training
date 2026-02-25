@@ -57,6 +57,16 @@ func main() {
 	ptr.Incr()
 	fmt.Println(myint1)
 
+	(*MyInt1)(&num).Incr()
+	fmt.Println(num)
+
+	var ptr1 = new(int)
+	*ptr1 = 99 // is. apointer
+
+	s7 := MyInt2(*ptr1).Sq()
+	println(s7)
+	(*MyInt1)(ptr1).Incr() // a poiinter of int can dictly be cased to pointer of MyInt1
+
 }
 
 type MyInt1 int // new type
