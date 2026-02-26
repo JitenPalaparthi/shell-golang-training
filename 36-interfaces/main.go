@@ -81,7 +81,7 @@ func (fw *FileWriter) Write(p []byte) (n int, err error) {
 	if err != nil {
 		return 0, NewFileError("102", err.Error())
 	}
-	defer file.Close()
+	defer file.Close() // 100% these funcs are called
 
 	n, err = file.Write(p)
 
