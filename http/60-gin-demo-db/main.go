@@ -49,16 +49,18 @@ func main() {
 	IuserDB := database.NewUserDB(db)
 	userHandler := handlers.NewUserHandler(IuserDB)
 
-	user_router := router.Group("/v1/public")
-
-	user_router.POST("/users", userHandler.Insert)
-	user_router.GET("/users/:id", userHandler.GetUserBy)
-	user_router.GET("/users/all", userHandler.GetAllUsers)
-	user_router.DELETE("/users/:id", userHandler.GetDeleteBy)
-	//{id}
+	GetUserRouterGroup(router, userHandler)
 
 	if err := router.Run(":" + PORT); err != nil {
 		slog.Error(err.Error())
 		runtime.Goexit() // before going to exit the main, it makes sure all other goroutines completed their execution
 	} // all interfaces
+}
+
+func GetUserRouterGroup(r *gin.Engine, userHandler *handlers.UserHandler) {
+	user_router := r.Group("/v1/public")
+	user_router.POST("/users", userHandler.Insert)
+	user_router.GET("/users/:id", userHandler.GetUserBy)
+	user_router.GET("/users/all", userHandler.GetAllUsers)
+	user_router.DELETE("/users/:id", userHandler.GetDeleteBy)
 }

@@ -1,0 +1,10 @@
+mode: set
+http-demo/models/user.go:8.13,11.2 1 1
+http-demo/models/user.go:22.33,24.18 1 1
+http-demo/models/user.go:24.18,26.3 1 1
+http-demo/models/user.go:28.2,28.19 1 1
+http-demo/models/user.go:28.19,31.3 1 1
+http-demo/models/user.go:33.2,33.29 1 1
+http-demo/models/user.go:33.29,35.3 1 1
+http-demo/models/user.go:38.2,38.12 1 1
+http-demo/models/user.go:41.39,46.2 2 1

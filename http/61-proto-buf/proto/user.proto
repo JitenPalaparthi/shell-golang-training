@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "grpc-demo/proto/user/v1;userv1";
+
+// User message (gRPC representation)
+message User {
+  uint64 id = 1;
+  string name = 2;
+  string email = 3;
+  string mobile = 4;
+  string status = 5;
+  int64 last_modified = 6; // unix seconds (match your model)
+}
+
+message CreateUserRequest {
+  // Usually client does NOT send id/status/last_modified; server sets them.
+  string name = 1;
+  string email = 2;
+  string mobile = 3;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+// CRUD service
+service UserService {
+  rpc InsertUser(CreateUserRequest) returns (CreateUserResponse);
+}
