@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+func init() { // no need to call
+	println("Some init in user Handler")
+}
+
 type UserHandler struct {
 	FileName string
 }
@@ -60,17 +64,18 @@ func (uh *UserHandler) Insert(w http.ResponseWriter, r *http.Request) {
 	user.Status = "active"
 	user.LastModified = time.Now().Unix()
 
-	err = helpers.SaveUser(uh.FileName, user)
-	if err != nil {
-		slog.Error(err.Error())
-		w.Write([]byte(err.Error()))
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
+	// err = helpers.SaveUser(uh.FileName, user)
+	// if err != nil {
+	// 	slog.Error(err.Error())
+	// 	w.Write([]byte(err.Error()))
+	// 	w.WriteHeader(http.StatusBadRequest)
+	// 	return
+	// }
 
-	w.Write([]byte("user successfully storefd"))
+	helpers.ChanUser <- user
+
+	w.Write([]byte("user successfully stored"))
 	w.WriteHeader(http.StatusCreated)
 
 	// Store in a file
-
 }

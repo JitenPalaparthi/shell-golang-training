@@ -5,9 +5,10 @@ import (
 	"http-demo/handlers"
 	"http-demo/helpers"
 	"log/slog"
-	"net/http"
 	"os"
 	"runtime"
+
+	"github.com/gin-gonic/gin"
 )
 
 var (
@@ -15,16 +16,8 @@ var (
 )
 
 func init() {
-	println("init is called-1")
 	PORT = os.Getenv("PORT")
-}
 
-func init() {
-	println("init is called-2")
-}
-
-func init() {
-	println("init is called-3")
 }
 
 func main() {
@@ -36,21 +29,22 @@ func main() {
 		flag.Parse()
 	}
 
+	router := gin.Default()
+
 	commonHandler := handlers.NewCommonhandler()
-
-	http.HandleFunc("/", commonHandler.Root)
-
-	http.HandleFunc("/ping", commonHandler.Ping)
-	http.HandleFunc("/health", commonHandler.Health("I am okay"))
+	router.GET("/", commonHandler.Root)
+	router.GET("/ping", commonHandler.Ping)
+	router.GET("/health", commonHandler.Health("I am ok"))
 
 	userHandler := handlers.NewUserHandler("users.db")
 
 	go helpers.ProcessUsers(userHandler.FileName)
 
-	http.HandleFunc("/users", userHandler.Insert)
+	user_router := router.Group("/v1/public")
 
-	slog.Info("Server is running on->" + PORT)
-	if err := http.ListenAndServe(":"+PORT, nil); err != nil {
+	user_router.POST("/users", userHandler.Insert)
+
+	if err := router.Run(":" + PORT); err != nil {
 		slog.Error(err.Error())
 		runtime.Goexit() // before going to exit the main, it makes sure all other goroutines completed their execution
 	} // all interfaces

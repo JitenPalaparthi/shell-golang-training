@@ -2,6 +2,10 @@ package handlers
 
 import "net/http"
 
+func init() {
+	println("some init in common handlers")
+}
+
 type CommonHandler struct {
 }
 
